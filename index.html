@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			background-image: url(https://img.freepik.com/free-vector/gradient-colorful-technology-background_52683-74699.jpg?w=1600);
+			background-repeat: no-repeat;
+		}
+		.data{
+			text-align: center;
+			margin-top: 16%;
+		}
+		.page{
+			color: red;
+			font-size: 40px;
+		}
+		#info{
+			width: 12%;
+			padding: 0.3%;
+		}
+		#password{
+			width: 12%;
+			padding: 0.3%;
+		}
+		.btn{
+			width: 6%;
+			padding: 0.3%;
+		}
+	</style>
+</head>
+<body>
+	<div class="data">
+	<h1 class="page">REGISTRATION PAGE</h1>
+	<p><input placeholder="Enter username" id="info"/></p>
+	<p><input placeholder="Enter password" id="password" type="password"/></p>
+	<button class="btn" onclick="show()">Submit</button>
+</div>
+	<script type="text/javascript">
+		function show(){
+				var username=document.getElementById("info").value
+				var password=document.getElementById("password").value
+				console.log(username,password)
+				fetch("http://localhost:3000/newData",{
+				method:"POST",
+				headers:{
+					"Content-Type":"application/json"
+				},
+				body:JSON.stringify({name:username,password:password})
+			})
+				.then((res)=>{
+					console.log(res)
+					if(res.status===200)
+						alert("Registration Successful")
+				})
+				.catch((err)=>{
+					alert(err)
+				})
+		}
+	</script>
+</body>
+</html>
