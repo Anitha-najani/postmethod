@@ -6,28 +6,37 @@
 	<title></title>
 	<style type="text/css">
 		body{
-			background-image: url(https://img.freepik.com/free-vector/gradient-colorful-technology-background_52683-74699.jpg?w=1600);
+			background-image:url(https://cdn.pixabay.com/photo/2016/04/18/16/22/watercolour-1336856_960_720.jpg);
 			background-repeat: no-repeat;
+			background-size: cover;
 		}
 		.data{
 			text-align: center;
-			margin-top: 16%;
+			margin-top: 8%;
 		}
 		.page{
-			color: red;
 			font-size: 40px;
 		}
 		#info{
-			width: 12%;
-			padding: 0.3%;
+			padding: 0.5%;
+			font-size: 15px;
+			border-radius: 25px;
 		}
 		#password{
-			width: 12%;
-			padding: 0.3%;
+			padding: 0.5%;
+			font-size: 15px;
+			border-radius: 25px;
 		}
 		.btn{
 			width: 6%;
 			padding: 0.3%;
+			border-radius: 20px;
+		}
+		#group{
+			font-size: 16px;
+			border-radius: 25px;
+			padding: 0.3%;
+			width: 8%;
 		}
 	</style>
 </head>
@@ -36,19 +45,33 @@
 	<h1 class="page">REGISTRATION PAGE</h1>
 	<p><input placeholder="Enter username" id="info"/></p>
 	<p><input placeholder="Enter password" id="password" type="password"/></p>
+	<p><select id="group">
+		<option value="Select Group">select Group</option>
+		<option value="CAMS">CAMS</option>
+		<option value="MSCS">MSCS</option>
+		<option value="CAME">CAME</option>
+		<option value="MPCS">MPCS</option>
+	</select></p>
+	<p><input type="radio" name="gender" id="male"/>Male
+	<input type="radio" name="gender" id="female"/>Female</p>
 	<button class="btn" onclick="show()">Submit</button>
 </div>
 	<script type="text/javascript">
 		function show(){
 				var username=document.getElementById("info").value
 				var password=document.getElementById("password").value
-				console.log(username,password)
+				var option=document.getElementById("group").value
+				var gmale=document.getElementById("male").checked
+				var gfemale=document.getElementById("female").checked
+				if(gmale==true) var gender="male"
+					else var gender="female"
+				console.log(username,password,option,gender)
 				fetch("http://localhost:3000/newData",{
 				method:"POST",
 				headers:{
 					"Content-Type":"application/json"
 				},
-				body:JSON.stringify({name:username,password:password})
+				body:JSON.stringify({name:username,password:password,group:option,gender:gender})
 			})
 				.then((res)=>{
 					console.log(res)
